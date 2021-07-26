@@ -4,20 +4,41 @@ import Navbar from "./Navbar";
 import "./Palette.css";
 
 function Palette({ palette }) {
+  var paletteName = palette.paletteName;
+  var emoji = palette.emoji;
+  var colors = palette.colors;
+
   const [level, setLevel] = useState(500);
+  const [format, setFormat] = useState("hex");
 
   const changeLevel = level => {
     setLevel(level);
   };
+
+  const changeFormat = val => {
+    setFormat(val);
+  };
+
   return (
     <div className="Palette">
-      <Navbar level={level} changeLevel={changeLevel} />
+      <Navbar
+        level={level}
+        changeLevel={changeLevel}
+        handleChange={changeFormat}
+      />
       <div className="Palette-colors">
-        {palette.colors[level].map(color => (
-          <ColorBox background={color.hex} name={color.name} />
+        {colors[level].map(color => (
+          <ColorBox
+            background={color[format]}
+            name={color.name}
+            key={color.id}
+          />
         ))}
       </div>
-      {/* footer eventually */}
+      <footer className="Palette-footer">
+        {paletteName}
+        <span className="emoji">{emoji}</span>
+      </footer>
     </div>
   );
 }

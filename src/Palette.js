@@ -4,9 +4,7 @@ import Navbar from "./Navbar";
 import "./Palette.css";
 
 function Palette({ palette }) {
-  var paletteName = palette.paletteName;
-  var emoji = palette.emoji;
-  var colors = palette.colors;
+  const { paletteName, emoji, colors } = palette;
 
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");

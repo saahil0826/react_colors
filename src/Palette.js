@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import "./Palette.css";
 
 function Palette({ palette }) {
-  const { paletteName, emoji, colors } = palette;
+  const { paletteName, emoji, colors, id } = palette;
 
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
@@ -30,6 +30,7 @@ function Palette({ palette }) {
             background={color[format]}
             name={color.name}
             key={color.id}
+            moreUrl={`/palette/${id}/${color.id}`}
           />
         ))}
       </div>

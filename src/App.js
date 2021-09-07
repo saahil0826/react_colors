@@ -9,25 +9,24 @@ import { generatePalette } from "./colorHelpers.js";
 
 class App extends Component {
   findPalette(id) {
-    return seedColors.find(function(palette) {
+    return seedColors.find(function (palette) {
       return palette.id === id;
     });
   }
   render() {
     return (
       <Switch>
-
         <Route
           exact
           path="/"
-          render={routeProps => (
+          render={(routeProps) => (
             <PaletteList palettes={seedColors} {...routeProps} />
           )}
         />
         <Route
           exact
           path="/palette/:id"
-          render={routeProps => (
+          render={(routeProps) => (
             <Palette
               palette={generatePalette(
                 this.findPalette(routeProps.match.params.id)
@@ -37,17 +36,17 @@ class App extends Component {
         />
 
         <Route
-       exact
-       path='/palette/:paletteId/:colorId'
-       render={routeProps => (
-         <SingleColorPalette
-           colorId={routeProps.match.params.colorId}
-           palette={generatePalette(
-             this.findPalette(routeProps.match.params.paletteId)
-           )}
-         />
-       )}
-     />
+          exact
+          path="/palette/:paletteId/:colorId"
+          render={(routeProps) => (
+            <SingleColorPalette
+              colorId={routeProps.match.params.colorId}
+              palette={generatePalette(
+                this.findPalette(routeProps.match.params.paletteId)
+              )}
+            />
+          )}
+        />
       </Switch>
     );
   }

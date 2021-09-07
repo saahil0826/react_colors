@@ -9,7 +9,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
 
-function Navbar({ level, changeLevel, handleChange }) {
+function Navbar({ level, changeLevel, handleChange, showingAllColors }) {
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
 
@@ -30,6 +30,8 @@ function Navbar({ level, changeLevel, handleChange }) {
       <div className="logo">
       <Link to='/'>reactcolorpicker</Link>
       </div>
+      {showingAllColors && (
+
       <div className="slider-container">
         <span>Level: {level}</span>
         <div className="slider">
@@ -42,6 +44,7 @@ function Navbar({ level, changeLevel, handleChange }) {
           />
         </div>
       </div>
+    )}
       <div className="select-container">
         <Select value={format} onChange={handleFormatChange}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>

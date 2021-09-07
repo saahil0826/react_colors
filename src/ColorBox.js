@@ -4,7 +4,7 @@ import chroma from "chroma-js";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 
-function ColorBox({ background, name, moreUrl, showLink }) {
+function ColorBox({ background, name, moreUrl, showingFullPalette }) {
   const [copied, setCopied] = useState(false);
   const isDarkColor = chroma(background).luminance() <= 0.08;
   const isLightColor = chroma(background).luminance() >= 0.7;
@@ -38,7 +38,7 @@ function ColorBox({ background, name, moreUrl, showLink }) {
             Copy
           </button>{" "}
         </div>
-        {showLink && (
+        {showingFullPalette && (
           <Link to={moreUrl} onClick={(e) => e.stopPropagation()}>
             <span className={`see-more ${isLightColor && "dark-text"}`}>
               MORE

@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import { ChromePicker } from "react-color";
+import DraggableColorBox from "./DraggableColorBox.js";
 
 const drawerWidth = 400;
 
@@ -56,6 +57,7 @@ const styles = (theme) => ({
   },
   content: {
     flexGrow: 1,
+    height: "calc(100vh - 64px)",
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -73,7 +75,9 @@ const styles = (theme) => ({
 });
 
 function NewPaletteForm(props) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [currentColor, setCurrentColor] = useState('teal');
+  const [colors, setColors] = useState(["purple", "#e15764"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -81,6 +85,14 @@ function NewPaletteForm(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const updateCurrentColor = (newColor) => {
+    setCurrentColor(newColor.hex);
+  };
+
+  const addNewColor = () => {
+    setColors([...colors, currentColor]);
   };
 
   const { classes } = props;
@@ -133,10 +145,15 @@ function NewPaletteForm(props) {
           </Button>
         </div>
         <ChromePicker
-          color="purple"
-          onChangeComplete={(newColor) => console.log(newColor)}
+          color={currentColor}
+          onChangeComplete={(newColor) => updateCurrentColor(newColor)}
         />
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: currentColor }}
+          onClick={() => addNewColor()}
+        >
           Add Color
         </Button>
       </Drawer>
@@ -146,6 +163,9 @@ function NewPaletteForm(props) {
         })}
       >
         <div className={classes.drawerHeader} />
+        {colors.map((color) => (
+          <DraggableColorBox color={color} />
+        ))}
       </main>
     </div>
   );

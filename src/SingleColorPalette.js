@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
 
-function SingleColorPalette({palette, colorId, paletteName, emoji}) {
-
-    const [format, setFormat] = useState("hex");
+function SingleColorPalette({ palette, colorId }) {
+  const [format, setFormat] = useState("hex");
 
   const gatherShades = (palette, colorToFilterBy) => {
     let shades = [];
@@ -20,15 +20,17 @@ function SingleColorPalette({palette, colorId, paletteName, emoji}) {
     return shades.slice(1);
   };
 
-  const changeFormat =(val) =>{
+  const changeFormat = (val) => {
     setFormat(val);
- }
+  };
   var _shades = gatherShades(palette, colorId);
+  const { paletteName, emoji, id } = palette;
 
+  console.log(emoji);
 
   const colorBoxes = _shades.map((color) => (
     <ColorBox
-      key={color.id}
+      key={color.name}
       name={color.name}
       background={color[format]}
       showLink={false}
@@ -36,11 +38,18 @@ function SingleColorPalette({palette, colorId, paletteName, emoji}) {
   ));
 
   return (
-    <div className="Palette">
-    <Navbar handleChange={changeFormat} showingAllColors={false} />
-      <div className="Palette-colors">{colorBoxes}</div>
-      <PaletteFooter paletteName={paletteName} emoji={emoji} />
+    <div className="SingleColorPalette Palette">
+      <Navbar handleChange={changeFormat} showingAllColors={false} />
+      <div className="Palette-colors">
+        {colorBoxes}
+        <div className="go-back ColorBox">
+          <Link to={`/palette/${id}`} className="back-button">
+            GO BACK
+          </Link>
+        </div>
+      </div>
 
+      <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
 }

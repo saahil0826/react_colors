@@ -115,6 +115,17 @@ function NewPaletteForm(props) {
     setNewName(e.target.value);
   };
 
+  const handleSubmit=()=> {
+    let newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: colors
+    };
+    props.savePalette(newPalette);
+    props.history.push("/");
+  }
+
   const { classes } = props;
 
   return (
@@ -122,6 +133,7 @@ function NewPaletteForm(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color='default'
         className={classNames(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -138,6 +150,13 @@ function NewPaletteForm(props) {
           <Typography variant="h6" color="inherit" noWrap>
             Persistent drawer
           </Typography>
+          <Button
+              variant='contained'
+              color='primary'
+              onClick={handleSubmit}
+            >
+              Save Palette
+            </Button>
         </Toolbar>
       </AppBar>
       <Drawer

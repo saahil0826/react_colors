@@ -18,9 +18,8 @@ function App() {
   };
 
   const savePalette = (newPalette) => {
-    setPalettes([...palettes, newPalette])
+    setPalettes([...palettes, newPalette]);
   };
-
 
   return (
     <Switch>
@@ -28,7 +27,11 @@ function App() {
         exact
         path="/palette/new"
         render={(routeProps) => (
-          <NewPaletteForm savePalette={savePalette} {...routeProps} />
+          <NewPaletteForm
+            savePalette={savePalette}
+            palettes={palettes}
+            {...routeProps}
+          />
         )}
       />
       <Route

@@ -55,6 +55,9 @@ function PaletteFormNav(props) {
   const showForm = () => {
     setFormShowing(true);
   };
+  const hideForm = () => {
+    setFormShowing(false);
+  };
 
   const { classes, open, palettes, handleSubmit } = props;
   return (
@@ -101,7 +104,7 @@ function PaletteFormNav(props) {
         </div>
       </AppBar>
       {formShowing && (
-        <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+        <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} hideForm={hideForm}/>
       )}
     </div>
   );

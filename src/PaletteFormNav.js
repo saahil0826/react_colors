@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -23,6 +23,7 @@ const styles = (theme) => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     height: "64px",
   },
   appBarShift: {
@@ -37,10 +38,24 @@ const styles = (theme) => ({
     marginLeft: 12,
     marginRight: 20,
   },
-  navBtns: {},
+  navBtns: {
+    marginRight: "1rem",
+    "& a": {
+      textDecoration: "none",
+    },
+  },
+  button: {
+    margin: "0 0.5rem",
+  },
 });
 
 function PaletteFormNav(props) {
+  const [formShowing, setFormShowing] = useState(false);
+
+  const showForm = () => {
+    setFormShowing(true);
+  };
+
   const { classes, open, palettes, handleSubmit } = props;
   return (
     <div className={classes.root}>
@@ -66,14 +81,28 @@ function PaletteFormNav(props) {
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
           <Link to="/">
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+            >
               Go Back
             </Button>
           </Link>
-        </div>{" "}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={showForm}
+            className={classes.button}
+          >
+            Save
+          </Button>
+        </div>
       </AppBar>
+      {formShowing && (
+        <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+      )}
     </div>
   );
 }

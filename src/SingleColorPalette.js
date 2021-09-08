@@ -26,7 +26,6 @@ function SingleColorPalette({ palette, colorId }) {
   var _shades = gatherShades(palette, colorId);
   const { paletteName, emoji, id } = palette;
 
-  console.log(emoji);
 
   const colorBoxes = _shades.map((color) => (
     <ColorBox

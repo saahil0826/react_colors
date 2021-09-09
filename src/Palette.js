@@ -3,7 +3,7 @@ import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
 import { withStyles } from "@material-ui/styles";
-import styles from "./styles/Palette.js";
+import styles from "./styles/PaletteStyles.js";
 
 function Palette(props) {
   const { paletteName, emoji, colors, id } = props.palette;

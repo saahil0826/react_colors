@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
+import { withStyles } from "@material-ui/styles";
+import styles from "./styles/PaletteStyles";
 
-function SingleColorPalette({ palette, colorId }) {
+function SingleColorPalette(props) {
+  const { classes, palette, colorId } = props;
+
   const [format, setFormat] = useState("hex");
 
   const gatherShades = (palette, colorToFilterBy) => {
@@ -24,8 +28,6 @@ function SingleColorPalette({ palette, colorId }) {
     setFormat(val);
   };
   var _shades = gatherShades(palette, colorId);
-  const { paletteName, emoji, id } = palette;
-
 
   const colorBoxes = _shades.map((color) => (
     <ColorBox
@@ -35,22 +37,20 @@ function SingleColorPalette({ palette, colorId }) {
       showingFullPalette={false}
     />
   ));
+  const { paletteName, emoji, id } = palette;
 
   return (
-    <div className="SingleColorPalette Palette">
+    <div className={classes.Palette}>
       <Navbar handleChange={changeFormat} showingAllColors={false} />
-      <div className="Palette-colors">
+      <div className={classes.colors}>
         {colorBoxes}
-        <div className="go-back ColorBox">
-          <Link to={`/palette/${id}`} className="back-button">
-            GO BACK
-          </Link>
+        <div className={classes.goBack}>
+          <Link to={`/palette/${id}`}>GO BACK</Link>
         </div>
       </div>
-
       <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
 }
 
-export default SingleColorPalette;
+export default withStyles(styles)(SingleColorPalette);

@@ -5,7 +5,6 @@ import { ChromePicker } from "react-color";
 import styles from "./styles/ColorPickerForm.js";
 import { withStyles } from "@material-ui/core/styles";
 
-
 function ColorPickerForm(props) {
   const [currentColor, setCurrentColor] = useState("teal");
   const [newColorName, setNewColorName] = useState("");
@@ -42,7 +41,7 @@ function ColorPickerForm(props) {
         onChangeComplete={(newColor) => updateCurrentColor(newColor)}
         className={classes.picker}
       />
-      <ValidatorForm onSubmit={handleSubmit}>
+      <ValidatorForm onSubmit={handleSubmit} instantValidate={false}>
         <TextValidator
           value={newColorName}
           className={classes.colorNameInput}

@@ -12,12 +12,13 @@ import Button from "@material-ui/core/Button";
 import DraggableColorList from "./DraggableColorList.js";
 import { arrayMoveImmutable } from "array-move";
 import styles from "./styles/NewPaletteForm.js";
+import seedColors from "./seedColors";
 
 
 
 function NewPaletteForm(props) {
   const [open, setOpen] = useState(true);
-  const [colors, setColors] = useState(props.palettes[0].colors);
+  const [colors, setColors] = useState(seedColors[0].colors);
 
   const handleDrawerOpen = () => {
     setOpen(true);

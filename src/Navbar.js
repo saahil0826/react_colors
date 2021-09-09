@@ -7,45 +7,45 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import "rc-slider/assets/index.css";
-import "./Navbar.css";
+import { withStyles } from "@material-ui/styles";
+import styles from "./styles/Navbar.js";
 
-function Navbar({ level, changeLevel, handleChange, showingAllColors }) {
+function Navbar(props) {
+  const { level, changeLevel, showingAllColors, handleChange, classes } = props;
+
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
 
-
-  const handleFormatChange = e => {
+  const handleFormatChange = (e) => {
     setFormat(e.target.value);
     handleChange(e.target.value);
     setOpen(true);
   };
-
 
   const closeSnackbar = () => {
     setOpen(false);
   };
 
   return (
-    <header className="Navbar">
-      <div className="logo">
-      <Link to='/'>reactcolorpicker</Link>
+    <header className={classes.Navbar}>
+      <div className={classes.logo}>
+        <Link to="/">reactcolorpicker</Link>
       </div>
       {showingAllColors && (
-
-      <div className="slider-container">
-        <span>Level: {level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={changeLevel}
-          />
+        <div>
+          <span>Level: {level}</span>
+          <div className={classes.slider}>
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onAfterChange={changeLevel}
+            />
+          </div>
         </div>
-      </div>
-    )}
-      <div className="select-container">
+      )}
+      <div className={classes.selectContainer}>
         <Select value={format} onChange={handleFormatChange}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -53,31 +53,29 @@ function Navbar({ level, changeLevel, handleChange, showingAllColors }) {
         </Select>
       </div>
       <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          open={open}
-          autoHideDuration={3000}
-          message={
-            <span id='message-id'>
-              Format Changed To {format.toUpperCase()}
-            </span>
-          }
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          onClose={closeSnackbar}
-          action={[
-            <IconButton
-              onClick={closeSnackbar}
-              color='inherit'
-              key='close'
-              aria-label='close'
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        open={open}
+        autoHideDuration={3000}
+        message={
+          <span id="message-id">Format Changed To {format.toUpperCase()}</span>
+        }
+        ContentProps={{
+          "aria-describedby": "message-id",
+        }}
+        onClose={closeSnackbar}
+        action={[
+          <IconButton
+            onClick={closeSnackbar}
+            color="inherit"
+            key="close"
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
+      />
     </header>
   );
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);

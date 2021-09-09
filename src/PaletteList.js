@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MiniPalette from "./MiniPalette.js";
 import { withStyles } from "@material-ui/styles";
 import styles from "./styles/PaletteList.js";
@@ -14,7 +15,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function PaletteList(props) {
   const { palettes, classes, deletePalette } = props;
@@ -52,8 +52,7 @@ function PaletteList(props) {
             <CSSTransition key={palette.id} classNames="fade" timeout={500}>
               <MiniPalette
                 {...palette}
-                handleClick={() => goToPalette(palette.id)}
-                //handleDelete={deletePalette}
+                goToPalette={goToPalette}
                 openDialog={openDialog}
                 key={palette.id}
                 id={palette.id}

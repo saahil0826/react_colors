@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/styles";
 import ColorBox from "./ColorBox.js";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
-import { withStyles } from "@material-ui/styles";
-import styles from "./styles/PaletteStyles";
+import styles from "./styles/PaletteStyles.js";
 
 function SingleColorPalette(props) {
   const { classes, palette, colorId } = props;

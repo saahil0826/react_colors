@@ -10,6 +10,8 @@ import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 
 function PaletteMetaForm(props) {
+  const { hideForm, handleSubmit } = props;
+
   const [newPaletteName, setNewPaletteName] = useState("");
   const [stage, setStage] = useState("form");
 
@@ -30,7 +32,8 @@ function PaletteMetaForm(props) {
       paletteName: newPaletteName,
       emoji: emoji.native,
     };
-    props.handleSubmit(newPalette);
+    handleSubmit(newPalette);
+    setStage('');
   };
 
   // const handleClickOpen = () => {
@@ -41,7 +44,6 @@ function PaletteMetaForm(props) {
   //   setOpen(false);
   // };
 
-  const { hideForm, handleSubmit } = props;
 
   return (
     <div>

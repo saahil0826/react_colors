@@ -4,11 +4,24 @@ import styles from "./styles/MiniPalette.js";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 function MiniPalette(props) {
-  const { classes, paletteName, emoji, colors, handleClick, openDialog, id} = props;
+  const {
+    classes,
+    paletteName,
+    emoji,
+    colors,
+    openDialog,
+    id,
+    goToPalette,
+  } = props;
+  console.log("RENDERING: ", paletteName);
 
   const deletePalette = (e) => {
     e.stopPropagation();
     openDialog(id);
+  };
+
+  const handleClick = () => {
+    goToPalette(id);
   };
 
   const miniColorBoxes = colors.map((color) => (
@@ -33,4 +46,4 @@ function MiniPalette(props) {
   );
 }
 
-export default withStyles(styles)(MiniPalette);
+export default React.memo(withStyles(styles)(MiniPalette));

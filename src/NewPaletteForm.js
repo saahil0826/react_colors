@@ -14,8 +14,6 @@ import { arrayMoveImmutable } from "array-move";
 import styles from "./styles/NewPaletteForm.js";
 import seedColors from "./seedColors";
 
-
-
 function NewPaletteForm(props) {
   const [open, setOpen] = useState(true);
   const [colors, setColors] = useState(seedColors[0].colors);
@@ -39,12 +37,20 @@ function NewPaletteForm(props) {
   const addRandomColor = () => {
     //pick random color from existing palettes
     const allColors = props.palettes.map((p) => p.colors).flat();
-    var rand = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[rand];
+    let rand;
+    let randomColor;
+    let isDuplicateColor = true;
+    while (isDuplicateColor) {
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      isDuplicateColor = colors.some(
+        (color) => color.name === randomColor.name
+      );
+    }
     setColors([...colors, randomColor]);
   };
 
-  const handleSubmit=(newPalette)=> {
+  const handleSubmit = (newPalette) => {
     newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
     newPalette.colors = colors;
     props.savePalette(newPalette);

@@ -74,6 +74,11 @@ function App() {
           />
         )}
       />
+      <Route
+        render={(routeProps) => (
+          <PaletteList palettes={palettes} deletePalette={deletePalette} {...routeProps} />
+        )}
+      />
     </Switch>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import PaletteMetaForm from "./PaletteMetaForm.js";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,9 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
 import Button from "@material-ui/core/Button";
-import PaletteMetaForm from "./PaletteMetaForm";
 import styles from "./styles/PaletteFormNav.js";
-
 
 function PaletteFormNav(props) {
   const [formShowing, setFormShowing] = useState(false);
@@ -40,9 +39,10 @@ function PaletteFormNav(props) {
             aria-label="Open drawer"
             onClick={handleDrawerOpen}
             className={classNames(classes.menuButton, {
-                           [classes.hide]: open
-                         })}          >
-                         <AddToPhotosIcon />
+              [classes.hide]: open,
+            })}
+          >
+            <AddToPhotosIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" noWrap>
             Create A Palette

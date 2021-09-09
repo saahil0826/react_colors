@@ -15,7 +15,6 @@ function App() {
 
    useEffect(() => {
      window.localStorage.setItem("palettes", JSON.stringify(palettes));
-     console.log(palettes);
    }, [palettes]);
 
   const findPalette = (id) => {
